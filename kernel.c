@@ -55,7 +55,7 @@ PCB_t* alloc_pcb();
 void go();
 void dispatch();
 
-void p1();
+int p1();
 //--------------------------------------------------------------------------------------------------
 
 
@@ -213,7 +213,7 @@ PCB_t* alloc_pcb(uint64_t sp, uint32_t pid, PCB_t *next) {
 void go() {
 }
 
-void p1() {
+int p1() {
 	unsigned int startRow = 21;
 	unsigned int startColumn = 49;
 	unsigned int endRow = 27;
