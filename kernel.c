@@ -76,11 +76,6 @@ int main() {
 	    	// go never returns to main
 	}
 	*/
-	//defining our boundaries
-	unsigned int startRow = 21;
-	unsigned int startColumn = 49;
-	unsigned int endRow = 27;
-	unsigned int endColumn = 79;
 	clear_src(0, 0, term_txtheight(), term_txtwidth()); // clearing the monitor
 	print_to(0, 0, "Running Processes"); //printing hello world
 
