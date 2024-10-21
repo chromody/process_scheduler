@@ -30,8 +30,8 @@ typedef struct PCB_Q {
 
 //--Global Variables -------------------------------------------------------------------------------
 int next_pid = 0; // Process ID counter
+int current_pid = 0;
 PCB_Q_t ready_queue; // The ready queue for processes
-PCB_t pcbs[MAX_PROCESSES]; // Fixed-size array for PCBs
 uint64_t stacks[MAX_PROCESSES][STACK_SIZE]; // Fixed-size array for stacks
 //--------------------------------------------------------------------------------------------------
 
@@ -90,7 +90,7 @@ int main() {
     ready_queue.tail = NULL; 
     ready_queue.size = 0;   
 
-    if (create_process(p1) != 0) return -1;
+    if (create_process(*p1) != 0) return -1;
 
 	return 0;
 }
@@ -112,12 +112,36 @@ void clear_src(unsigned int startRow, unsigned int startColumn, unsigned int end
 	}
 }
 
+
+/// We are adding to the back and taking from the front. It is still fifo, just backwards.
+/*
+	|---|		|---|		|---|		|---|
+	|	| ---> 	|	| ---> 	|	| ---> 	|	|
+	|---|		|---|		|---|		|---|
+	HEAD								TAIL
+
+	We add to the back
+
+	|---|		|---|		|---|		|---|
+	| 	| ---> 	|	| ---> 	|	| ---> 	|	|
+	|---|		|---|		|---|		|---|
+	HEAD					OLD			NEW
+							TAIL		TAIL
+	
+	We take from the front
+
+	|---|		|---|		|---|		|---|
+	|	| X 	|	| ---> 	|	| --->  |	|
+	|---|		|---|		|---|		|---|
+	OLD			NEW						TAIL
+	HEAD		HEAD
+*/
 void enqueue(PCB_Q_t *q, PCB_t *pcb) {
     if (q->size >= MAX_PROCESSES) {
-        return; // Queue is full, do not enqueue
+        return; // Queue is full, do not enqueue. Maybe return a error response like 0
     }
     
-    pcb->next = NULL; // Set the next pointer of the new PCB to NULL
+    pcb->next = NULL; // Set the next pointer of the new PCB to NULL // maybe should be done on allocation
 
     if (q->tail) {
         // If the queue is not empty, link the new PCB at the end
@@ -134,7 +158,7 @@ void enqueue(PCB_Q_t *q, PCB_t *pcb) {
 
 PCB_t *dequeue(PCB_Q_t *q) {
     if (q->size == 0) {
-        return NULL; // Queue is empty, nothing to dequeue
+        return NULL; // Queue is empty, nothing to dequeue // maybe return error response
     }
     
     PCB_t *pcb = q->head; // Get the head PCB
