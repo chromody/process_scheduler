@@ -13,9 +13,27 @@ void box(unsigned int startRow, unsigned int startColumn, unsigned int endRow, u
 int term_txtheight(); //Prototype to find the maximum height of the terminal, defined in libos.a
 int term_txtwidth(); //Prototype to find the maximum width of the terminal, defined in libos.a
 
+void enqueue(PCB_Q_t *q, PCB_t *pcb);
+PCB_t *dequeue(PCB_Q_t *q);
+
 
 //--Main 
 int main() {
+	/*
+	int main() {
+    		clear the screen
+    		print "Running processes" on the first line of the screen
+
+		→   initialize Ready queue data structure      
+		→   set retval to the return value of create_process(p1)
+		→   check if error (retval != 0)
+	    	// repeat the above for process p2, p3, and p4
+
+	    	// Now begin running the first process ...
+		→   go()
+	    	// go never returns to main
+	}
+	*/
 	//defining our boundaries
 	unsigned int startRow = 21;
 	unsigned int startColumn = 49;
@@ -25,7 +43,7 @@ int main() {
 
 	box(startRow, startColumn, endRow, endColumn); // drawing the box
 	
-	print_to(24, 59, "Hello World!"); //printing hello world
+	print_to(24, 59, "Running Processes"); //printing hello world
 }
 
 // Name: clear_src
