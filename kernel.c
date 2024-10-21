@@ -3,7 +3,24 @@
 	Name: kernel.c
 	Purpose: This will serve as the driver for our operating system? It just draws a box and hello string right now
 */
+#include <stdint.h>
 
+//--Global Variables
+#define MAX_PROCESSES 10
+
+//--Structures
+typedef struct PCB {
+    uint64_t sp;       // Stack pointer
+    uint32_t pid;      // Process ID
+    struct PCB *next;  // Pointer to the next PCB in the linked list
+} PCB_t;
+
+typedef struct PCB_Q {
+    PCB_t pcbs[MAX_PROCESSES]; // Fixed-size array for PCBs
+    int front;                // Index of the front of the queue
+    int rear;                 // Index of the rear of the queue
+    int size;                 // Current number of PCBs in the queue
+} PCB_Q_t;
 
 //--Prototypes
 void putc_to(unsigned int row, unsigned int col, const char c); //Prototype to print a character, defined in libos.a
