@@ -51,6 +51,8 @@ int create_process(int (*code_address)());
 uint64_t* alloc_stack();
 PCB_t* alloc_pcb();
 void go();
+
+void p1();
 //--------------------------------------------------------------------------------------------------
 
 
