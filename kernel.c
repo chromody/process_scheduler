@@ -193,11 +193,8 @@ int create_process(int (*code_address)()) {
 }
 
 uint64_t* alloc_stack() {
-    static int stack_index = 0; // Track the next stack to use
-    if (stack_index < MAX_PROCESSES) {
-        return stacks[stack_index++]; // Return the next available stack
-    }
-    return NULL; // No more stacks available
+	uint64_t stack[MAX_PROCESSES];
+	return stack;
 }
 
 PCB_t* alloc_pcb(uint64_t sp, uint32_t pid, PCB_t *next) {
