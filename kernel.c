@@ -53,6 +53,7 @@ int create_process(int (*code_address)());
 uint64_t* alloc_stack();
 PCB_t* alloc_pcb();
 void go();
+void dispatch();
 
 void p1();
 //--------------------------------------------------------------------------------------------------
@@ -80,19 +81,18 @@ int main() {
 	unsigned int startColumn = 49;
 	unsigned int endRow = 27;
 	unsigned int endColumn = 79;
-	clear_src(startRow, startColumn, endRow, endColumn); // clearing the section that we draw in
+	clear_src(0, 0, term_txtheight(), term_txtwidth()); // clearing the monitor
+	print_to(0, 0, "Running Processes"); //printing hello world
 
-	box(startRow, startColumn, endRow, endColumn); // drawing the box
+	//box(startRow, startColumn, endRow, endColumn); // drawing the box
 	
-	print_to(24, 59, "Running Processes"); //printing hello world
-
 	ready_queue.head = NULL; 
     ready_queue.tail = NULL; 
     ready_queue.size = 0;   
 
     if (create_process(*p1) != 0) return -1;
 
-	return 0;
+	go();
 }
 //--------------------------------------------------------------------------------------------------
 
@@ -175,31 +175,27 @@ PCB_t *dequeue(PCB_Q_t *q) {
 }
 
 int create_process(int (*code_address)()) {
-    uint64_t *stackptr = (uint64_t *)alloc_stack();
+    PCB_t *pcb = alloc_pcb(0, 0, 0); // Get the next PCB
+    uint64_t *stackptr = alloc_stack(); // Allocate a stack
     if (stackptr == NULL) {
         return -1; // Error: stack allocation failed
     }
 
-    uint64_t *sp = stackptr + 1024; // Set sp to the top of the stack
+    uint64_t *sp = stackptr + STACK_SIZE; // Set sp to the top of the stack
 
     for (int i = 0; i <= 32; i++) {
-        sp--; // Move sp down the stack
-        *sp = 0; // Initialize register values to 0
+        sp--; 
+        *sp = 0; // Initialize registers to 0
     }
 
     sp[30] = (uint64_t)code_address; // Set the code address
 
-    PCB_t *pcb = alloc_pcb();
-    if (pcb == NULL) {
-        return -1; // Error: PCB allocation failed
-    }
+    pcb->sp = (uint64_t)sp; // Set stack pointer in the PCB
+    pcb->pid = next_pid++; // Assign process ID
 
-    pcb->sp = (uint64_t)sp; // Set the stack pointer in the PCB
-    pcb->pid = next_pid++; // Assign a unique process ID
+    enqueue(&ready_queue, pcb); // Enqueue the PCB
 
-    enqueue(&ready_queue, pcb); // Enqueue the PCB onto the ready queue
-
-    return 0; // No errors occurred
+    return 0; // No errors
 }
 
 uint64_t* alloc_stack() {
@@ -210,12 +206,17 @@ uint64_t* alloc_stack() {
     return NULL; // No more stacks available
 }
 
-PCB_t* alloc_pcb() {
-    static int pcb_index = 0; // Track the next PCB to use
-    if (pcb_index < MAX_PROCESSES) {
-        return &pcbs[pcb_index++]; // Return the next available PCB
-    }
-    return NULL; // No more PCBs available
+PCB_t* alloc_pcb(uint64_t sp, uint32_t pid, PCB_t *next) {
+	PCB_t* newPCB;
+	(*newPCB).sp = sp;
+	(*newPCB).pid = pid;
+	(*newPCB).next = next;
+
+	return newPCB;
+}
+
+void go() {
+	return 0;
 }
 
 void p1() {
