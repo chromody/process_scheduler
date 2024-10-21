@@ -170,7 +170,7 @@ PCB_t *dequeue(PCB_Q_t *q) {
 }
 
 int create_process(int (*code_address)()) {
-    PCB_t *pcb = alloc_pcb(0, 0, 0); // Get the next PCB
+    PCB_t *pcb; // Get the next PCB
     uint64_t *stackptr = alloc_stack(); // Allocate a stack
     if (stackptr == NULL) {
         return -1; // Error: stack allocation failed
@@ -185,8 +185,7 @@ int create_process(int (*code_address)()) {
 
     sp[30] = (uint64_t)code_address; // Set the code address
 
-    pcb->sp = (uint64_t)sp; // Set stack pointer in the PCB
-    pcb->pid = next_pid++; // Assign process ID
+	pcb = alloc_pcb((uint64_t)sp, code_address, NULL);
 
     enqueue(&ready_queue, pcb); // Enqueue the PCB
 
