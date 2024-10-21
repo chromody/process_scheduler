@@ -4,6 +4,8 @@
 	Purpose: This will serve as the driver for our operating system? It just draws a box and hello string right now
 */
 #include <stdint.h>
+#include <stddef.h>
+
 
 //--Preprocessor Definition ------------------------------------------------------------------------
 #define MAX_PROCESSES 10
@@ -196,11 +198,8 @@ void p1() {
     char message[] = "Process 1: 0";
     int num = 0;
 
-    draw_box(9, 23, 11, 39); // Draw a box for the output
-
     while (1) {
         message[11] = num + '0'; // Update the number
-        print(message, 10, 25);  // Print at row 10, column 25
         num++;
         if (num > 9) num = 0;    // Reset after 9
         dispatch();               // Switch to another process
