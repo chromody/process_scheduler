@@ -211,7 +211,6 @@ PCB_t* alloc_pcb(uint64_t sp, uint32_t pid, PCB_t *next) {
 }
 
 void go() {
-	return 0;
 }
 
 void p1() {
