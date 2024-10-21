@@ -194,7 +194,7 @@ int create_process(int (*code_address)()) {
 
 uint64_t* alloc_stack() {
 	uint64_t stack[MAX_PROCESSES];
-	return stack;
+	return &stack;
 }
 
 PCB_t* alloc_pcb(uint64_t sp, uint32_t pid, PCB_t *next) {
