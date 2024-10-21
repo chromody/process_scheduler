@@ -230,7 +230,7 @@ int p1() {
 
     while (1) {
         message[11] = num + '0'; // Update the number
-		print_to(24, 59, "Process 1: "); //printing hello world
+		print_to(24, 59, message); //printing hello world
         num++;
         if (num > 9) num = 0;    // Reset after 9
     }
