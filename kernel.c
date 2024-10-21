@@ -202,7 +202,6 @@ void p1() {
         message[11] = num + '0'; // Update the number
         num++;
         if (num > 9) num = 0;    // Reset after 9
-        dispatch();               // Switch to another process
     }
 }
 //--------------------------------------------------------------------------------------------------
