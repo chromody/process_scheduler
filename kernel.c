@@ -214,11 +214,23 @@ void go() {
 }
 
 void p1() {
+	unsigned int startRow = 21;
+	unsigned int startColumn = 49;
+	unsigned int endRow = 27;
+	unsigned int endColumn = 79;
+
     char message[] = "Process 1: 0";
     int num = 0;
 
+	clear_src(startRow, startColumn, endRow, endColumn); // clearing the section that we draw in
+
+	box(startRow, startColumn, endRow, endColumn); // drawing the box
+	
+	print_to(24, 59, "Hello World!"); //printing hello world
+
     while (1) {
         message[11] = num + '0'; // Update the number
+		print_to(24, 59, "Process 1: "); //printing hello world
         num++;
         if (num > 9) num = 0;    // Reset after 9
     }
