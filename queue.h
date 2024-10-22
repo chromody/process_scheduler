@@ -9,6 +9,7 @@
 #define STACK_SIZE 1024
 //--------------------------------------------------------------------------------------------------
 
+
 //--Structure --------------------------------------------------------------------------------------
 typedef struct PCB {
     uint64_t sp;       // Stack pointer
@@ -25,11 +26,11 @@ typedef struct PCB_Q {
 
 
 //--Global Variables -------------------------------------------------------------------------------
-PCB_Q_t ready_queue; // The ready queue for processes
-PCB_t running;
-int next_pid = 0; // Process ID counter
-int current_pid = 0;
-uint64_t stacks[MAX_PROCESSES][STACK_SIZE]; // Fixed-size array for stacks
+extern PCB_Q_t ready_queue; // The ready queue for processes
+extern PCB_t running;
+extern int next_pid = 0; // Process ID counter
+extern int current_pid = 0;
+extern uint64_t stacks[MAX_PROCESSES][STACK_SIZE]; // Fixed-size array for stacks
 //--------------------------------------------------------------------------------------------------
 
 
