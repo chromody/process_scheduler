@@ -5,7 +5,6 @@
 */
 #include <stdint.h>
 #include <stddef.h>
-#include "queue.c"
 #include "process.c"
 
 //--Prototypes -------------------------------------------------------------------------------------
