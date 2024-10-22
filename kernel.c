@@ -56,6 +56,10 @@ void go();
 void dispatch();
 
 int p1();
+int p2();
+int p3();
+int p4();
+
 //--------------------------------------------------------------------------------------------------
 
 
@@ -84,8 +88,19 @@ int main() {
 	ready_queue.head = NULL; 
     ready_queue.tail = NULL; 
     ready_queue.size = 0;   
+	int retval = 0;
+	
+	retval = create(*p1);
+    if (retval != 0) return -1;
 
-    if (create_process(*p1) != 0) return -1;
+	retval = create(*p2);
+    if (retval != 0) return -1;
+
+	retval = create(*p3);
+    if (retval != 0) return -1;
+
+	retval = create(*p4);
+    if (retval != 0) return -1;
 
 	go();
 }
@@ -170,7 +185,7 @@ PCB_t *dequeue(PCB_Q_t *q) {
 }
 
 int create_process(int (*code_address)()) {
-    PCB_t *pcb; // Get the next PCB
+    PCB_t *pcb = NULL; // Get the next PCB
     uint64_t *stackptr = alloc_stack(); // Allocate a stack
     if (stackptr == NULL) {
         return -1; // Error: stack allocation failed
@@ -186,6 +201,11 @@ int create_process(int (*code_address)()) {
     sp[30] = (uint64_t)code_address; // Set the code address
 
 	pcb = alloc_pcb((uint64_t)sp, code_address, NULL);
+	if (pcb == NULL) {
+		return -1;
+	}
+	pcb->sp = sp;
+	pcb->pid = next_pid;
 
     enqueue(&ready_queue, pcb); // Enqueue the PCB
 
@@ -210,23 +230,81 @@ void go() {
 }
 
 int p1() {
-	unsigned int startRow = 21;
-	unsigned int startColumn = 49;
-	unsigned int endRow = 27;
-	unsigned int endColumn = 79;
+	unsigned int startRow = 9;
+	unsigned int startColumn = 23;
+	unsigned int endRow = 11;
+	unsigned int endColumn = 39;
 
     char message[] = "Process 1: 0";
     int num = 0;
 
-	clear_src(startRow, startColumn, endRow, endColumn); // clearing the section that we draw in
-
 	box(startRow, startColumn, endRow, endColumn); // drawing the box
-	
-	print_to(24, 59, "Hello World!"); //printing hello world
+	print_to(10, 25, message); //printing process 1 : num
+
 
     while (1) {
         message[11] = num + '0'; // Update the number
-		print_to(24, 59, message); //printing hello world
+		print_to(10, 25, message); //printing process 1 : num
+        num++;
+        if (num > 9) num = 0;    // Reset after 9
+    }
+}
+
+int p2() {
+	unsigned int startRow = 13;
+	unsigned int startColumn = 23;
+	unsigned int endRow = 15;
+	unsigned int endColumn = 39;
+
+    char message[] = "Process 2: 0";
+    int num = 0;
+
+	box(startRow, startColumn, endRow, endColumn); // drawing the box
+	print_to(14, 25, message); //printing process 1 : num
+
+    while (1) {
+        message[11] = num + '0'; // Update the number
+		print_to(24, 59, message); //printing process 1 : num
+        num++;
+        if (num > 9) num = 0;    // Reset after 9
+    }
+}
+
+int p3() {
+	unsigned int startRow = 9;
+	unsigned int startColumn = 49;
+	unsigned int endRow = 11;
+	unsigned int endColumn = 39;
+
+    char message[] = "Process 3: 0";
+    int num = 0;
+
+	box(startRow, startColumn, endRow, endColumn); // drawing the box
+	print_to(10, 50, message); //printing process 1 : num
+
+    while (1) {
+        message[11] = num + '0'; // Update the number
+		print_to(10, 25, message); //printing process 1 : num
+        num++;
+        if (num > 9) num = 0;    // Reset after 9
+    }
+}
+
+int p4() {
+	unsigned int startRow = 13;
+	unsigned int startColumn = 49;
+	unsigned int endRow = 15;
+	unsigned int endColumn = 39;
+
+    char message[] = "Process 4: 0";
+    int num = 0;
+
+	box(startRow, startColumn, endRow, endColumn); // drawing the box
+	print_to(14, 50, message); //printing process 1 : num
+
+    while (1) {
+        message[11] = num + '0'; // Update the number
+		print_to(14, 50, message); //printing process 1 : num
         num++;
         if (num > 9) num = 0;    // Reset after 9
     }
