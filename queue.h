@@ -28,8 +28,8 @@ typedef struct PCB_Q {
 //--Global Variables -------------------------------------------------------------------------------
 extern PCB_Q_t ready_queue; // The ready queue for processes
 extern PCB_t running;
-extern int next_pid = 0; // Process ID counter
-extern int current_pid = 0;
+extern int next_pid; // Process ID counter
+extern int current_pid;
 extern uint64_t stacks[MAX_PROCESSES][STACK_SIZE]; // Fixed-size array for stacks
 //--------------------------------------------------------------------------------------------------
 
