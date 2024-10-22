@@ -17,6 +17,10 @@ int current_pid = 0;
 uint64_t stacks[MAX_PROCESSES][STACK_SIZE]; // Fixed-size array for stacks
 //--------------------------------------------------------------------------------------------------
 
+int create_process(int (*code_address)());
+uint64_t* alloc_stack();
+PCB_t* alloc_pcb();
+
 int create_process(int (*code_address)()) {
     PCB_t *pcb = NULL; // Get the next PCB
     uint64_t *stackptr = alloc_stack(); // Allocate a stack
