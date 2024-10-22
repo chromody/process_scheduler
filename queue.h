@@ -22,11 +22,12 @@ typedef struct PCB_Q {
     int size;    // Current number of PCBs in the queue
 } PCB_Q_t;
 //--------------------------------------------------------------------------------------------------
-
-
-//--Global Variables -------------------------------------------------------------------------------
+int next_pid = 0; // Process ID counter
+int current_pid = 0;
+uint64_t stacks[MAX_PROCESSES][STACK_SIZE]; // Fixed-size array for stacks
 PCB_Q_t ready_queue; // The ready queue for processes
 PCB_t running;
+//--Global Variables -------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------
 
 

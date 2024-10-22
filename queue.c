@@ -1,7 +1,6 @@
 
 #include <stdint.h>
 #include <stddef.h>
-#include "queue.h"
 
 /// We are adding to the back and taking from the front. It is still fifo, just backwards.
 /*
