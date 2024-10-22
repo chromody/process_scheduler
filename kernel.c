@@ -5,7 +5,7 @@
 */
 #include <stdint.h>
 #include <stddef.h>
-#include "process.c"
+#include "queue.h"
 
 //--Prototypes -------------------------------------------------------------------------------------
 void putc_to(unsigned int row, unsigned int col, const char c); //Prototype to print a character, defined in libos.a

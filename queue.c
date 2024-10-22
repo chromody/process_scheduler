@@ -1,27 +1,7 @@
 
 #include <stdint.h>
 #include <stddef.h>
-
-//--Preprocessor Definition ------------------------------------------------------------------------
-#define MAX_PROCESSES 10
-#define STACK_SIZE 1024
-//--------------------------------------------------------------------------------------------------
-
-
-//--Structure --------------------------------------------------------------------------------------
-typedef struct PCB {
-    uint64_t sp;       // Stack pointer
-    uint32_t pid;      // Process ID
-    struct PCB *next;  // Pointer to the next PCB in the linked list
-} PCB_t;
-
-typedef struct PCB_Q {
-    PCB_t *head; // Pointer to the head of the queue (linked list)
-    PCB_t *tail; // Pointer to the tail of the queue (linked list)
-    int size;    // Current number of PCBs in the queue
-} PCB_Q_t;
-//--------------------------------------------------------------------------------------------------
-
+#include "queue.h"
 
 /// We are adding to the back and taking from the front. It is still fifo, just backwards.
 /*

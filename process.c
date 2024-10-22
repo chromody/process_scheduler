@@ -1,17 +1,8 @@
-
 #include <stdint.h>
 #include <stddef.h>
-#include "queue.c"
-
-//--Preprocessor Definition ------------------------------------------------------------------------
-#define MAX_PROCESSES 10
-#define STACK_SIZE 1024
-//--------------------------------------------------------------------------------------------------
+#include "queue.h"
 
 //--Global Variables -------------------------------------------------------------------------------
-//--Global Variables -------------------------------------------------------------------------------
-PCB_Q_t ready_queue; // The ready queue for processes
-PCB_t running;
 int next_pid = 0; // Process ID counter
 int current_pid = 0;
 uint64_t stacks[MAX_PROCESSES][STACK_SIZE]; // Fixed-size array for stacks
