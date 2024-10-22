@@ -14,10 +14,10 @@ box.o: box.S
 	$(CROSS_PREFIX)gcc -g -MMD -c box.S -o box.o
 
 queue.o: queue.c
-	$(CROSS_PREFIX)gcc -g -MMD -c queue.c -o queue.o
+	$(CROSS_PREFIX)gcc -g -pedantic -Wall -Wextra -fPIC -std=gnu2x -MMD -c queue.c -o queue.o
 
 process.o: process.c
-	$(CROSS_PREFIX)gcc -g -MMD -c process.c -o process.o
+	$(CROSS_PREFIX)gcc -g -pedantic -Wall -Wextra -fPIC -std=gnu2x -MMD -c process.c -o process.o
 
 process_asm.o: process_asm.S
 	$(CROSS_PREFIX)gcc -g -MMD -c process_asm.S -o process_asm.o
