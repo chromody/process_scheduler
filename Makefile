@@ -13,8 +13,11 @@ boot.o: boot.S
 box.o: box.S
 	$(CROSS_PREFIX)gcc -g -MMD -c box.S -o box.o
 
-kernel.elf: kernel.o boot.o box.o libos.a 
-	$(CROSS_PREFIX)ld -g -N -Ttext=0x10000 -o kernel.elf kernel.o boot.o box.o libos.a
+process_asm.o: process_asm.S
+	$(CROSS_PREFIX)gcc -g -MMD -c process_asm.S -o process_asm.o
+
+kernel.elf: kernel.o boot.o box.o process_asm.o libos.a 
+	$(CROSS_PREFIX)ld -g -N -Ttext=0x10000 -o kernel.elf kernel.o boot.o box.o process_asm.o libos.a
 
 run:
 	qemu-system-aarch64 -machine raspi3b   -kernel kernel.elf
@@ -24,4 +27,4 @@ debug:
 	ddd --debugger 'gdb-multiarch -ex "target remote localhost:1234" -ex "break main" -ex "continue"' kernel.elf
 	
 clean:
-	rm -f kernel.elf kernel.o boot.o box.o kernel.d boot.d box.d
+	rm -f kernel.elf kernel.o boot.o box.o process_asm.o kernel.d boot.d box.d process_asm.d

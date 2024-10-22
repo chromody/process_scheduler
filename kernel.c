@@ -33,6 +33,7 @@ int next_pid = 0; // Process ID counter
 int current_pid = 0;
 int running_processes = 0;
 PCB_Q_t ready_queue; // The ready queue for processes
+PCB_t running;
 uint64_t stacks[MAX_PROCESSES][STACK_SIZE]; // Fixed-size array for stacks
 //--------------------------------------------------------------------------------------------------
 
