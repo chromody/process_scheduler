@@ -21,7 +21,7 @@ int main() {
 	print_to(0, 0, "Printing Process!"); //printing hello world
 	
 
-	p1();
+	p2();
 	return 0;
 }
 
@@ -45,6 +45,28 @@ int p1() {
 	unsigned int endRow = 11;
 	unsigned int endColumn = 39;
 	char message[] = "Process 1: 0";
+	int num = 0;
+
+	box(startRow, startColumn, endRow, endColumn); // drawing the box
+	
+	print_to(startRow + 1, startColumn + 2, message); 
+
+	while (1==1) {
+		message[11] = '0' + ++num;
+		print_to(startRow + 1, startColumn + 2, message); //printing hello world;
+		if (num > 9) {
+			num = 0; 
+		}
+	}
+	//call dispatch
+}
+
+int p2() {
+	unsigned int startRow = 13;
+	unsigned int startColumn = 23;
+	unsigned int endRow = 15;
+	unsigned int endColumn = 39;
+	char message[] = "Process 2: 0";
 	int num = 0;
 
 	box(startRow, startColumn, endRow, endColumn); // drawing the box
