@@ -52,8 +52,7 @@ int p1() {
 	print_to(startRow + 1, startColumn + 2, message); 
 
 	while (1==1) {
-		++num;
-		message[11] = '1';
+		message[11] = '0' + ++num;
 		print_to(startRow + 1, startColumn + 2, message); //printing hello world;
 		if (num > 9) {
 			num = 0; 
