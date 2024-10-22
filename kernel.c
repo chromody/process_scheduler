@@ -44,8 +44,20 @@ int p1() {
 	unsigned int startColumn = 23;
 	unsigned int endRow = 11;
 	unsigned int endColumn = 39;
+	char message[] = "Process 1: 0";
+	int num = 0;
 
 	box(startRow, startColumn, endRow, endColumn); // drawing the box
 	
-	print_to(startRow + 1, startColumn + 2, "Hello World!"); //printing hello world
+	print_to(startRow + 1, startColumn + 2, message); 
+
+	while (1==1) {
+		++num;
+		message[11] = '1';
+		print_to(startRow + 1, startColumn + 2, message); //printing hello world;
+		if (num > 9) {
+			num = 0; 
+		}
+	}
+	//call dispatch
 }
