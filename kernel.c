@@ -92,7 +92,7 @@ int p3() {
 	unsigned int startRow = 9;
 	unsigned int startColumn = 49;
 	unsigned int endRow = 11;
-	unsigned int endColumn = 39;
+	unsigned int endColumn = 65;
 	char message[] = "Process 3: 0";
 	int num = 0;
 
