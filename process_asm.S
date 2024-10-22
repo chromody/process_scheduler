@@ -23,23 +23,23 @@ dispatch:
     str x0, [sp, #240]
 
     // Store the current SP in the PCB
-    ldr x1, =running
-    str sp, [x1]
+    //ldr x1, =running
+    //str sp, [x1]
 
     // Enqueue the current process
-    ldr x0, =ready_queue
-    bl enqueue
+    //ldr x0, =ready_queue
+    //bl enqueue
 
     // Dequeue the next process
-    ldr x0, =ready_queue
-    bl dequeue
-    mov x1, x0  // Move the dequeued PCB to x1
+    //ldr x0, =ready_queue
+    //bl dequeue
+    //mov x1, x0  // Move the dequeued PCB to x1
 
     // Restore the context of the next process
-    ldr x0, [x1]  // Load the SP from the PCB
-    mov sp, x0    // Restore the SP
-    ldr x0, [sp, #240]  // Restore the PSTATE
-    msr SPSR_EL1, x0
+    //ldr x0, [x1]  // Load the SP from the PCB
+    //mov sp, x0    // Restore the SP
+    //ldr x0, [sp, #240]  // Restore the PSTATE
+    //msr SPSR_EL1, x0
 
     // Restore the general-purpose registers
     ldp x0, x1, [sp]
