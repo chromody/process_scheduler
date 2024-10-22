@@ -14,6 +14,11 @@ int term_txtheight(); //Prototype to find the maximum height of the terminal, de
 int term_txtwidth(); //Prototype to find the maximum width of the terminal, defined in libos.a
 
 
+int p1();
+int p2();
+int p3();
+int p4();
+
 //--Main 
 int main() {
 	//defining our boundaries
