@@ -31,6 +31,7 @@ typedef struct PCB_Q {
 //--Global Variables -------------------------------------------------------------------------------
 int next_pid = 0; // Process ID counter
 int current_pid = 0;
+int running_processes = 0;
 PCB_Q_t ready_queue; // The ready queue for processes
 uint64_t stacks[MAX_PROCESSES][STACK_SIZE]; // Fixed-size array for stacks
 //--------------------------------------------------------------------------------------------------
@@ -213,20 +214,25 @@ int create_process(int (*code_address)()) {
 }
 
 uint64_t* alloc_stack() {
-	uint64_t stack[MAX_PROCESSES];
-	return *stack;
+	static int stack_index = 0; // Track the next stack to use
+    if (running_processes < MAX_PROCESSES) {
+        return stacks[stack_index++]; // Return the next available stack
+    }
+    return NULL; // No more stacks available
 }
 
 PCB_t* alloc_pcb(uint64_t sp, uint32_t pid, PCB_t *next) {
+	if (running_processes >= MAX_PROCESSES) {
+		return NULL;
+	}
 	PCB_t* newPCB;
+	++running_processes;
+
 	(*newPCB).sp = sp;
 	(*newPCB).pid = pid;
 	(*newPCB).next = next;
 
 	return newPCB;
-}
-
-void go() {
 }
 
 int p1() {
