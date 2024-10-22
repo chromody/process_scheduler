@@ -90,16 +90,16 @@ int main() {
     ready_queue.size = 0;   
 	int retval = 0;
 	
-	retval = create(*p1);
+	retval = create_process(*p1);
     if (retval != 0) return -1;
 
-	retval = create(*p2);
+	retval = create_process(*p2);
     if (retval != 0) return -1;
 
-	retval = create(*p3);
+	retval = create_process(*p3);
     if (retval != 0) return -1;
 
-	retval = create(*p4);
+	retval = create_process(*p4);
     if (retval != 0) return -1;
 
 	go();
