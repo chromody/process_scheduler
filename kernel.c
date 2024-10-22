@@ -235,6 +235,9 @@ PCB_t* alloc_pcb(uint64_t sp, uint32_t pid, PCB_t *next) {
 	return newPCB;
 }
 
+void go() {
+}
+
 int p1() {
 	unsigned int startRow = 9;
 	unsigned int startColumn = 23;
