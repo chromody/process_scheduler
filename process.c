@@ -2,11 +2,9 @@
 #include <stddef.h>
 #include "queue.h"
 
-//--Global Variables -------------------------------------------------------------------------------
 int next_pid = 0; // Process ID counter
 int current_pid = 0;
 uint64_t stacks[MAX_PROCESSES][STACK_SIZE]; // Fixed-size array for stacks
-//--------------------------------------------------------------------------------------------------
 
 int create_process(int (*code_address)());
 uint64_t* alloc_stack();
