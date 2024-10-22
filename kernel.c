@@ -7,6 +7,11 @@
 #include <stddef.h>
 #include "queue.h"
 
+
+
+next_pid = 0;
+current_pid = 0;
+
 //--Prototypes -------------------------------------------------------------------------------------
 void putc_to(unsigned int row, unsigned int col, const char c); //Prototype to print a character, defined in libos.a
 void print_to(unsigned int row, unsigned int col, const char[]); //Prototype to print some text, defined in libos.a
