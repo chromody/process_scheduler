@@ -22,7 +22,7 @@ process.o: process.c
 process_asm.o: process_asm.S
 	$(CROSS_PREFIX)gcc -g -MMD -c process_asm.S -o process_asm.o
 
-kernel.elf: kernel.o boot.o box.o process_asm.o libos.a 
+kernel.elf: kernel.o boot.o box.o queue.o process.o process_asm.o libos.a 
 	$(CROSS_PREFIX)ld -g -N -Ttext=0x10000 -o kernel.elf kernel.o boot.o box.o queue.o process.o process_asm.o libos.a
 
 run:
