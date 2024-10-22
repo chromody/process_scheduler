@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include <stddef.h>
+#include "queue.h"
 
 int create_process(int (*code_address)());
 uint64_t* alloc_stack();
