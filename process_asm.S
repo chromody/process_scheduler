@@ -1,6 +1,7 @@
 .section .text
 .global dispatch
 .global go
+.global readyQueue //readyqueue from kernel.c
 
 // Function to start the first process
 go:
