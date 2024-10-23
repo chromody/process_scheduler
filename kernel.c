@@ -69,6 +69,8 @@ int main() {
 	readyQueue.tail = NULL;
 	readyQueue.size = 0;
 
+	p0();
+
 	retval = create_process(p1);
 	if (retval != 0) {return -1;}
 
@@ -173,6 +175,28 @@ PCB_t* alloc_pcb() {
 		return NULL;
 	}
 	return &pcbs[next_process++];
+}
+
+int p0() {
+	unsigned int startRow = 9;
+	unsigned int startColumn = 23;
+	unsigned int endRow = 11;
+	unsigned int endColumn = 39;
+	char message[] = "Process 1: 0";
+	int num = 0;
+
+	box(startRow, startColumn, endRow, endColumn); // drawing the box
+	
+	print_to(startRow + 1, startColumn + 2, message); 
+
+	while (1==1) {
+		message[11] = '0' + ++num;
+		print_to(startRow + 1, startColumn + 2, message); //printing hello world;
+		if (num > 9) {
+			num = 0; 
+			//dispatch(); //call dispatch
+		}
+	}
 }
 
 int p1() {
