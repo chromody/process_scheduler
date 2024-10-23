@@ -30,6 +30,7 @@ PCB_Q_t readyQueue;
 int next_pid = 0;
 PCB_t *running; // Pointer to the currently running PCB
 uint64_t stacks[MAX_PROCESSES][STACK_SIZE]; // Fixed-size array for stacks
+PCB_t pcbs[MAX_PROCESSES];
 //--------------------------------------------------------------------------------------------------
 
 //--Prototypes
@@ -167,15 +168,11 @@ uint64_t alloc_stack() {
 }
 
 PCB_t* alloc_pcb() {
-	//static int next_process = 0;
+	static int next_process = 0;
 	if (readyQueue.size > MAX_PROCESSES) {
 		return NULL;
 	}
-	PCB_t* pcb;
-	pcb->pid = 0;
-	pcb->sp = 0;
-	pcb->next = NULL;
-	return pcb;
+	return &pcbs[next_process++];
 }
 
 void go() {
