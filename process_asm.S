@@ -52,4 +52,6 @@ restore_context:
     11) add 16*16 to sp
     12) return
     */
+    ldr x0, =readyQueue          // Load the value 42 into register x0 (parameter for my_function)
+    bl dequeue       // Call my_function, passing the parameter in x0
     ret  // Return to the next process
