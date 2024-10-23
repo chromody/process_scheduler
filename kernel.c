@@ -13,7 +13,7 @@
 
 //--Structure --------------------------------------------------------------------------------------
 typedef struct PCB {
-	uint64_t sp;
+	uint64_t* sp;
 	uint32_t pid;
 	struct PCB *next;
 } PCB_t;
