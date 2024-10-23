@@ -59,6 +59,7 @@ dispatch:
 
     ldr x0, =readyQueue          // Load the value 42 into register x0 (parameter for my_function)
     ldr x1, =running
+    bl enqueue
 
 restore_context:
     /*
