@@ -175,10 +175,6 @@ PCB_t* alloc_pcb() {
 	return &pcbs[next_process++];
 }
 
-void go() {
-
-}
-
 int p1() {
 	unsigned int startRow = 9;
 	unsigned int startColumn = 23;
