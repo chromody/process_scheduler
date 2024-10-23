@@ -192,10 +192,9 @@ int p1() {
 		print_to(startRow + 1, startColumn + 2, message); //printing hello world;
 		if (num > 9) {
 			num = 0; 
+			dispatch(); //call dispatch
 		}
 	}
-	dispatch();
-	//call dispatch
 }
 
 int p2() {
@@ -215,10 +214,9 @@ int p2() {
 		print_to(startRow + 1, startColumn + 2, message); //printing hello world;
 		if (num > 9) {
 			num = 0; 
+			dispatch(); //call dispatch
 		}
 	}
-	dispatch();
-	//call dispatch
 }
 
 int p3() {
@@ -238,10 +236,9 @@ int p3() {
 		print_to(startRow + 1, startColumn + 2, message); //printing hello world;
 		if (num > 9) {
 			num = 0; 
+			dispatch();//call dispatch
 		}
 	}
-	dispatch();
-	//call dispatch
 }
 
 int p4() {
@@ -261,8 +258,7 @@ int p4() {
 		print_to(startRow + 1, startColumn + 2, message); //printing hello world;
 		if (num > 9) {
 			num = 0; 
+			dispatch();//call dispatch
 		}
 	}
-	dispatch();
-	//call dispatch
 }
