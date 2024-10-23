@@ -51,7 +51,7 @@ int create_process(int (*code_address)());
 void dispatch();
 
 
-int* p1();
+int p1();
 int p2();
 int p3();
 int p4();
@@ -182,7 +182,7 @@ void go() {
 
 }
 
-int* p1() {
+int p1() {
 	unsigned int startRow = 9;
 	unsigned int startColumn = 23;
 	unsigned int endRow = 11;
