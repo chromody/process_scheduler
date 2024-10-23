@@ -2,6 +2,10 @@
 .global dispatch
 .global go
 .global readyQueue //readyqueue from kernel.c
+.global nextPid
+.global running
+.global stacks
+.global pcbs
 
 // Function to start the first process
 go:

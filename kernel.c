@@ -27,7 +27,7 @@ typedef struct PCB_Q {
 
 //--Global Variables -------------------------------------------------------------------------------
 PCB_Q_t readyQueue;
-int next_pid = 0;
+int nextPID = 0;
 PCB_t *running; // Pointer to the currently running PCB
 uint64_t stacks[MAX_PROCESSES][STACK_SIZE]; // Fixed-size array for stacks
 PCB_t pcbs[MAX_PROCESSES];
@@ -152,7 +152,7 @@ int create_process(int (*code_address)()) {
 	if (pcb == NULL) {return -1;}
 
 	pcb->sp = sp;
-	pcb->pid = next_pid;
+	pcb->pid = nextPID;
 
 	enqueue(&readyQueue, pcb);
 
