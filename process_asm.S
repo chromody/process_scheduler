@@ -81,7 +81,7 @@ restore_context:
     ldp x24, x25, [sp, #192]     // Restore x24 and x25
     ldp x26, x27, [sp, #208]     // Restore x26 and x27
     ldp x28, x29, [sp, #224]     // Restore x28 and x29
-    ldr x30, [sp, 240]
+    ldr x30, [sp, #256]
 
     add sp, sp, #256 // 16*16
 
