@@ -57,4 +57,12 @@ restore_context:
     ldr x1, =running      // Load the address of the result variable
     str x0, [x1]         // Store the return value into result
 
+    adr x1, running
+    str x0, [x1]
+    ldr x2, [x0]
+    mov sp, x2
+
+    ldr x0, [sp, 16*15+8]
+    msr SPSR_EL1, x0
+
     ret  // Return to the next process
