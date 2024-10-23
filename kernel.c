@@ -3,6 +3,7 @@
 	Name: kernel.c
 	Purpose: This will serve as the driver for our operating system? It just draws a box and hello string right now
 */
+#include "libos.h"
 #include <stdint.h>
 #include <stddef.h>
 
@@ -34,8 +35,8 @@ PCB_t pcbs[MAX_PROCESSES];
 //--------------------------------------------------------------------------------------------------
 
 //--Prototypes
-void putc_to(unsigned int row, unsigned int col, const char c); //Prototype to print a character, defined in libos.a
-void print_to(unsigned int row, unsigned int col, const char[]); //Prototype to print some text, defined in libos.a
+//void putc_to(unsigned int row, unsigned int col, const char c); //Prototype to print a character, defined in libos.a
+//void print_to(unsigned int row, unsigned int col, const char[]); //Prototype to print some text, defined in libos.a
 void clear_src(unsigned int startRow, unsigned int startColumn, unsigned int endRow, unsigned int endColumn); //Prototype to clear at a ordered pair, defined in libos.a
 void box(unsigned int startRow, unsigned int startColumn, unsigned int endRow, unsigned int endColumn); //Prototype to draw a box, defined in box.S
 int term_txtheight(); //Prototype to find the maximum height of the terminal, defined in libos.a
@@ -217,8 +218,8 @@ int p1() {
 		print_to(startRow + 1, startColumn + 2, message); //printing hello world;
 		if (num > 9) {
 			num = 0; 
-			dispatch(); //call dispatch
 		}
+		dispatch(); //call dispatch
 	}
 }
 
@@ -239,8 +240,8 @@ int p2() {
 		print_to(startRow + 1, startColumn + 2, message); //printing hello world;
 		if (num > 9) {
 			num = 0; 
-			dispatch(); //call dispatch
 		}
+		dispatch(); //call dispatch
 	}
 }
 
@@ -261,8 +262,8 @@ int p3() {
 		print_to(startRow + 1, startColumn + 2, message); //printing hello world;
 		if (num > 9) {
 			num = 0; 
-			dispatch();//call dispatch
 		}
+			dispatch();//call dispatch
 	}
 }
 
@@ -283,7 +284,7 @@ int p4() {
 		print_to(startRow + 1, startColumn + 2, message); //printing hello world;
 		if (num > 9) {
 			num = 0; 
-			dispatch();//call dispatch
 		}
+		dispatch();//call dispatch
 	}
 }
