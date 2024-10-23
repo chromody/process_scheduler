@@ -69,6 +69,8 @@ int main() {
 	readyQueue.tail = NULL;
 	readyQueue.size = 0;
 
+	p1();
+
 	retval = create_process(p1);
 	if (retval != 0) {return -1;}
 
