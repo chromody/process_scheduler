@@ -146,7 +146,7 @@ int create_process(int (*code_address)()) {
 		*sp = 0;
 	}
 
-	*sp = (uint64_t)code_address;
+	*(sp+30) = (uint64_t)code_address;
 	
 	PCB_t* pcb = alloc_pcb();
 	if (pcb == NULL) {return -1;}
