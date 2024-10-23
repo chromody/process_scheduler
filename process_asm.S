@@ -65,4 +65,22 @@ restore_context:
     ldr x0, [sp, 16*15+8]
     msr SPSR_EL1, x0
 
+    // Restore registers x0-x30 from the stack
+    ldp x0, x1, [sp]             // Restore x0 and x1
+    ldp x2, x3, [sp, #16]        // Restore x2 and x3
+    ldp x4, x5, [sp, #32]        // Restore x4 and x5
+    ldp x6, x7, [sp, #48]        // Restore x6 and x7
+    ldp x8, x9, [sp, #64]        // Restore x8 and x9
+    ldp x10, x11, [sp, #80]      // Restore x10 and x11
+    ldp x12, x13, [sp, #96]      // Restore x12 and x13
+    ldp x14, x15, [sp, #112]     // Restore x14 and x15
+    ldp x16, x17, [sp, #128]     // Restore x16 and x17
+    ldp x18, x19, [sp, #144]     // Restore x18 and x19
+    ldp x20, x21, [sp, #160]     // Restore x20 and x21
+    ldp x22, x23, [sp, #176]     // Restore x22 and x23
+    ldp x24, x25, [sp, #192]     // Restore x24 and x25
+    ldp x26, x27, [sp, #208]     // Restore x26 and x27
+    ldp x28, x29, [sp, #224]     // Restore x28 and x29
+
+
     ret  // Return to the next process
