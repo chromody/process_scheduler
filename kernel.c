@@ -171,11 +171,11 @@ PCB_t* alloc_pcb() {
 	if (readyQueue.size > MAX_PROCESSES) {
 		return NULL;
 	}
-	PCB_t pcb;
-	pcb.pid = 0;
-	pcb.sp = 0;
-	pcb.next = NULL;
-	return &pcb;
+	PCB_t* pcb;
+	pcb->pid = 0;
+	pcb->sp = 0;
+	pcb->next = NULL;
+	return pcb;
 }
 
 void go() {
