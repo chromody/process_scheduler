@@ -23,13 +23,13 @@ dispatch:
     stp x24, x25, [sp, #192] // Save x24 and x25
     stp x26, x27, [sp, #208] // Save x26 and x27
     stp x28, x29, [sp, #224] // Save x28 and x29
-    mrs x0, SPSR_EL1      // Save the PSTATE
-    str x0, [sp, #240]    // Store PSTATE
+    mrs x30, SPSR_EL1      // Save the PSTATE
+    str x30, [sp, #240]    // Store PSTATE
 
     // Store the current SP in the PCB
     ldr x1, =running       // Load address of running PCB
     ldr x0, [x1]          // Load the pointer to the PCB
-    str sp, [x0]          // Store current SP in the PCB (no offset)
+    str sp, [x0, #SP_OFFSET] // Store current SP in the PCB (use an appropriate offset)
 
     // Enqueue the current process
     ldr x0, =readyQueue   // Load address of ready queue
@@ -44,10 +44,9 @@ dispatch:
 
 restore_context:
     // Restore the context of the next process
-    ldr x0, [x1]          // Load the SP from the PCB
-    mov sp, x0            // Restore the SP
-    ldr x0, [sp, #240]    // Restore PSTATE
-    msr SPSR_EL1, x0      // Restore PSTATE
+    ldr sp, [x1]          // Load the SP from the PCB
+    ldr x30, [sp, #240]   // Restore PSTATE
+    msr SPSR_EL1, x30     // Restore PSTATE
 
     // Restore the general-purpose registers
     ldp x0, x1, [sp]
