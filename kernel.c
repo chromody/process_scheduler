@@ -178,6 +178,10 @@ PCB_t *alloc_pcb() {
 	return pcb;
 }
 
+void go() {
+	
+}
+
 int p1() {
 	unsigned int startRow = 9;
 	unsigned int startColumn = 23;
