@@ -54,6 +54,7 @@ restore_context:
     */
     ldr x0, =readyQueue          // Load the value 42 into register x0 (parameter for my_function)
     bl dequeue       // Call my_function, passing the parameter in x0
-    str x0, =running
+    ldr x1, =running      // Load the address of the result variable
+    str x0, [x1]         // Store the return value into result
 
     ret  // Return to the next process
