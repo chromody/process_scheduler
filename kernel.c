@@ -51,7 +51,7 @@ int create_process(int (*code_address)());
 void dispatch();
 
 
-int p1();
+int* p1();
 int p2();
 int p3();
 int p4();
@@ -68,16 +68,16 @@ int main() {
 	readyQueue.tail = NULL;
 	readyQueue.size = 0;
 
-	retval = create_process((int)p1());
+	retval = create_process(p1());
 	if (retval != 0) {return -1;}
 
-	retval = create_process((int)p2());
+	retval = create_process(p2());
 	if (retval != 0) {return -1;}
 
-	retval = create_process((int)p3());
+	retval = create_process(p3());
 	if (retval != 0) {return -1;}
 
-	retval = create_process((int)p4());
+	retval = create_process(p4());
 	if (retval != 0) {return -1;}
 
 	go();
@@ -182,7 +182,7 @@ void go() {
 
 }
 
-int p1() {
+int* p1() {
 	unsigned int startRow = 9;
 	unsigned int startColumn = 23;
 	unsigned int endRow = 11;
