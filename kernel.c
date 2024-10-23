@@ -191,7 +191,7 @@ int p1() {
 	
 	print_to(startRow + 1, startColumn + 2, message); 
 
-	while (1==1) {
+	while (1==0) {
 		message[11] = '0' + ++num;
 		print_to(startRow + 1, startColumn + 2, message); //printing hello world;
 		if (num > 9) {
@@ -214,7 +214,7 @@ int p2() {
 	
 	print_to(startRow + 1, startColumn + 2, message); 
 
-	while (1==1) {
+	while (1==0) {
 		message[11] = '0' + ++num;
 		print_to(startRow + 1, startColumn + 2, message); //printing hello world;
 		if (num > 9) {
@@ -237,7 +237,7 @@ int p3() {
 	
 	print_to(startRow + 1, startColumn + 2, message); 
 
-	while (1==1) {
+	while (1==0) {
 		message[11] = '0' + ++num;
 		print_to(startRow + 1, startColumn + 2, message); //printing hello world;
 		if (num > 9) {
@@ -260,7 +260,7 @@ int p4() {
 	
 	print_to(startRow + 1, startColumn + 2, message); 
 
-	while (1==1) {
+	while (1==0) {
 		message[11] = '0' + ++num;
 		print_to(startRow + 1, startColumn + 2, message); //printing hello world;
 		if (num > 9) {
