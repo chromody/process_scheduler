@@ -1,6 +1,12 @@
 .section .text
 .global dispatch
 
+go:
+    /* You can use goto to branch to restore_context, but
+  	      you will have to make it .global in the assembly
+  	      file */
+	b dispatch
+
 dispatch:
     // Save the current process context
     sub sp, sp, #(16 * 16)  // Allocate space on the stack for registers
