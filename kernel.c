@@ -195,6 +195,7 @@ int p0() {
 		message[11] = '0' + num;
 		print_to(startRow + 1, startColumn + 2, message); //printing hello world;
 		if (num > 9) {
+			print_to(startRow + 1, startColumn + 2, message); //printing hello world;
 			num = 0; 
 			//dispatch(); //call dispatch
 		}
