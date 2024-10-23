@@ -143,10 +143,10 @@ int create_process(int (*code_address)()) {
 
 	for (int i = 0; i <= 32; ++i) {
 		--sp;
-		stackptr[*sp] = 0;
+		*sp = 0;
 	}
 
-	stackptr[(*sp)+30] = (uint64_t)code_address;
+	*sp = (uint64_t)code_address;
 	
 	PCB_t* pcb = alloc_pcb();
 	if (pcb == NULL) {return -1;}
