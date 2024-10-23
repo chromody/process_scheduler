@@ -3,7 +3,34 @@
 	Name: kernel.c
 	Purpose: This will serve as the driver for our operating system? It just draws a box and hello string right now
 */
+#include <stdint.h>
+#include <stddef.h>
 
+//--Preprocessor Definition ------------------------------------------------------------------------
+#define MAX_PROCESSES 4
+#define STACK_SIZE 1024
+//----------------------------------------------------------------------------------------
+
+//--Structure --------------------------------------------------------------------------------------
+typedef struct PCB {
+	uint64_t sp;
+	uint32_t pid;
+	struct PCB *next;
+} PCB_t;
+
+typedef struct PCB_Q {
+	PCB_t *head;
+	PCB_t *tail;
+	int size;
+}	PCB_Q_t;
+//----------------------------------------------------------------------------------------
+
+//--Global Variables -------------------------------------------------------------------------------
+PCB_Q_t readyQueue;
+int next_pid = 0;
+PCB_t *running; // Pointer to the currently running PCB
+uint64_t stacks[MAX_PROCESSES][STACK_SIZE]; // Fixed-size array for stacks
+//--------------------------------------------------------------------------------------------------
 
 //--Prototypes
 void putc_to(unsigned int row, unsigned int col, const char c); //Prototype to print a character, defined in libos.a
@@ -14,6 +41,16 @@ int term_txtheight(); //Prototype to find the maximum height of the terminal, de
 int term_txtwidth(); //Prototype to find the maximum width of the terminal, defined in libos.a
 
 
+int create_process();
+uint64_t *alloc_stack();
+PCB_t *alloc_pcb();
+void go();
+void enqueue(PCB_Q_t *q, PCB_t *pcb);
+PCB_t *dequeue(PCB_Q_t *q);
+int create_process(int (*code_address)());
+void dispatch();
+
+
 int p1();
 int p2();
 int p3();
@@ -21,12 +58,30 @@ int p4();
 
 //--Main 
 int main() {
+	int retval = 0;
+
 	//defining our boundaries
 	clear_src(0, 0, term_txtheight(), term_txtwidth()); // clearing the section that we draw in
 	print_to(0, 0, "Printing Process!"); //printing hello world
 	
+	readyQueue.head = NULL;
+	readyQueue.tail = NULL;
+	readyQueue.size = 0;
 
-	p4();
+	retval = create_process(p1());
+	if (retval != 0) {return -1;}
+
+	retval = create_process(p2());
+	if (retval != 0) {return -1;}
+
+	retval = create_process(p3());
+	if (retval != 0) {return -1;}
+
+	retval = create_process(p4());
+	if (retval != 0) {return -1;}
+
+	go();
+
 	return 0;
 }
 
@@ -43,6 +98,85 @@ void clear_src(unsigned int startRow, unsigned int startColumn, unsigned int end
 	}
 }
 
+// Enqueue a PCB to the ready queue
+void enqueue(PCB_Q_t *q, PCB_t *pcb) {
+    if (q->size >= MAX_PROCESSES) {
+        return; // Queue is full
+    }
+    
+    pcb->next = NULL; // Set the next pointer of the new PCB
+
+    if (q->tail) {
+        q->tail->next = pcb; // Link the new PCB at the end
+    } else {
+        q->head = pcb; // Set head if queue is empty
+    }
+
+    q->tail = pcb; // Update the tail
+    q->size++; // Increment the size of the queue
+}
+
+// Dequeue a PCB from the ready queue
+PCB_t *dequeue(PCB_Q_t *q) {
+    if (q->size == 0) {
+        return NULL; // Queue is empty
+    }
+    
+    PCB_t *pcb = q->head; // Get the head PCB
+    q->head = pcb->next; // Move the head pointer to the next PCB
+    
+    if (q->head == NULL) {
+        q->tail = NULL; // Update tail if queue is now empty
+    }
+
+    q->size--; // Decrement the size of the queue
+    pcb->next = NULL; // Clean up the next pointer
+    return pcb; // Return the dequeued PCB
+}
+
+int create_process(int (*code_address)()) {
+	uint64_t *stackptr = alloc_stack();
+	if (stackptr == NULL) {return -1;}
+
+	uint64_t sp = stackptr + STACK_SIZE;
+
+	for (int i = 0; i <= 32; ++i) {
+		--sp;
+		stackptr[sp] = 0;
+	}
+
+	stackptr[sp+30] = (uint64_t)code_address;
+	
+	PCB_t* pcb = alloc_pcb();
+	if (pcb == NULL) {return pcb;}
+
+	pcb->sp = sp;
+	pcb->pid = next_pid;
+
+	enqueue(&readyQueue, pcb);
+
+	return 0;
+}
+
+uint64_t* alloc_stack() {
+	static int next_stack = 0;
+	if (readyQueue.size > MAX_PROCESSES) {
+		return NULL;
+	}
+	return stacks[next_stack++];
+}
+
+PCB_t *alloc_pcb() {
+	static int next_process = 0;
+	if (readyQueue.size > MAX_PROCESSES) {
+		return NULL;
+	}
+	PCB_t *pcb;
+	pcb->pid = 0;
+	pcb->sp = 0;
+	pcb->next = NULL;
+	return pcb;
+}
 
 int p1() {
 	unsigned int startRow = 9;
@@ -63,6 +197,7 @@ int p1() {
 			num = 0; 
 		}
 	}
+	dispatch();
 	//call dispatch
 }
 
@@ -85,6 +220,7 @@ int p2() {
 			num = 0; 
 		}
 	}
+	dispatch();
 	//call dispatch
 }
 
@@ -107,6 +243,7 @@ int p3() {
 			num = 0; 
 		}
 	}
+	dispatch();
 	//call dispatch
 }
 
@@ -129,5 +266,6 @@ int p4() {
 			num = 0; 
 		}
 	}
+	dispatch();
 	//call dispatch
 }
