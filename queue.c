@@ -5,6 +5,7 @@
 */
 #include "queue.h"
 
+//--Functions ----------------------------------------------------------------------------------------------------
 // Enqueue a PCB to the ready queue
 void enqueue(PCB_Q_t *q, PCB_t *pcb) {
     if (q->size >= MAX_PROCESSES) {
@@ -40,3 +41,4 @@ PCB_t *dequeue(PCB_Q_t *q) {
     pcb->next = NULL; // Clean up the next pointer
     return pcb; // Return the dequeued PCB
 }
+//----------------------------------------------------------------------------------------------------------------

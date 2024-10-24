@@ -6,6 +6,13 @@
 #include "process.h"
 #include "queue.h"
 
+//--Variables ----------------------------------------------------------------------------------------------------
+int nextPID = 1;
+uint64_t stacks[MAX_PROCESSES][STACK_SIZE]; // Fixed-size array for stacks
+PCB_t pcbs[MAX_PROCESSES];
+//----------------------------------------------------------------------------------------------------------------
+
+//--Functions ----------------------------------------------------------------------------------------------------
 int create_process(int (*code_address)()) {
 	uint64_t* stackptr = alloc_stack();
 	if (stackptr == NULL) {return -1;}
@@ -45,7 +52,4 @@ PCB_t* alloc_pcb() {
 	}
 	return &pcbs[next_process++];
 }
-
-int nextPID = 1;
-uint64_t stacks[MAX_PROCESSES][STACK_SIZE]; // Fixed-size array for stacks
-PCB_t pcbs[MAX_PROCESSES];
+//----------------------------------------------------------------------------------------------------------------

@@ -1,3 +1,9 @@
+/*
+	Author: Jesus Villanueva-Segovia
+	Name: process_asm.S
+	Purpose: This will house our process scheduling functions. 
+*/
+
 .section .text
 .global dispatch
 .global go
