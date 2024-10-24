@@ -93,8 +93,8 @@ int p1() {
 
 	while (1==1) {
 		message[11] = '0' + ++num;
-		print_to(startRow + 1, startColumn + 2, message); //printing hello world;
-		if (num > 9) {
+		print_to(startRow + 1, startColumn + 2, message); // Process 1: num
+		if (num > 9) { // reset at 0
 			num = 0; 
 		}
 		dispatch(); //call dispatch
@@ -112,13 +112,13 @@ int p2() {
 	char message[] = "Process 2: 0";
 	int num = 0;
 
-	box(startRow, startColumn, endRow, endColumn); // drawing the box
+	box(startRow, startColumn, endRow, endColumn);
 	
 	print_to(startRow + 1, startColumn + 2, message); 
 
 	while (1==1) {
 		message[11] = '0' + ++num;
-		print_to(startRow + 1, startColumn + 2, message); //printing hello world;
+		print_to(startRow + 1, startColumn + 2, message); 
 		if (num > 9) {
 			num = 0; 
 		}
@@ -137,13 +137,13 @@ int p3() {
 	char message[] = "Process 3: 0";
 	int num = 0;
 
-	box(startRow, startColumn, endRow, endColumn); // drawing the box
+	box(startRow, startColumn, endRow, endColumn); 
 	
 	print_to(startRow + 1, startColumn + 2, message); 
 
 	while (1==1) {
 		message[11] = '0' + ++num;
-		print_to(startRow + 1, startColumn + 2, message); //printing hello world;
+		print_to(startRow + 1, startColumn + 2, message);
 		if (num > 9) {
 			num = 0; 
 		}
@@ -162,13 +162,13 @@ int p4() {
 	char message[] = "Process 4: 0";
 	int num = 0;
 
-	box(startRow, startColumn, endRow, endColumn); // drawing the box
+	box(startRow, startColumn, endRow, endColumn);
 	
 	print_to(startRow + 1, startColumn + 2, message); 
 
 	while (1==1) {
 		message[11] = '0' + ++num;
-		print_to(startRow + 1, startColumn + 2, message); //printing hello world;
+		print_to(startRow + 1, startColumn + 2, message); 
 		if (num > 9) {
 			num = 0; 
 		}
