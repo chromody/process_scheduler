@@ -1,3 +1,8 @@
+/*
+	Author: Jesus Villanueva-Segovia
+	Name: queue.h
+	Purpose: This is the header file for our queue c file.
+*/
 #ifndef QUEUE_H
 #define QUEUE_H
 #include "process.h"

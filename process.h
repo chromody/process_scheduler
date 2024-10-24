@@ -1,3 +1,9 @@
+/*
+	Author: Jesus Villanueva-Segovia
+	Name: process.h
+	Purpose: This will serve as the driver for our operating system? It just draws a box and hello string right now
+*/
+
 #ifndef PROCESS_H
 #define PROCESS_H
 #include <stdint.h>

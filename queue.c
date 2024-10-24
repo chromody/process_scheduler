@@ -1,3 +1,8 @@
+/*
+	Author: Jesus Villanueva-Segovia
+	Name: queue.c
+	Purpose: This contains our queue functions and our ready queue
+*/
 #include "queue.h"
 
 // Enqueue a PCB to the ready queue
@@ -35,5 +40,3 @@ PCB_t *dequeue(PCB_Q_t *q) {
     pcb->next = NULL; // Clean up the next pointer
     return pcb; // Return the dequeued PCB
 }
-
-PCB_Q_t readyQueue;
