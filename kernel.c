@@ -28,7 +28,7 @@ typedef struct PCB_Q {
 
 //--Global Variables -------------------------------------------------------------------------------
 PCB_Q_t readyQueue;
-int nextPID = 0;
+int nextPID = 1;
 PCB_t *running; // Pointer to the currently running PCB
 uint64_t stacks[MAX_PROCESSES][STACK_SIZE]; // Fixed-size array for stacks
 PCB_t pcbs[MAX_PROCESSES];
