@@ -36,4 +36,4 @@ PCB_t *dequeue(PCB_Q_t *q) {
     return pcb; // Return the dequeued PCB
 }
 
-PCB_t readyQueue;
+PCB_Q_t readyQueue;
