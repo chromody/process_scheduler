@@ -58,7 +58,8 @@ dispatch:
     str     x4, [x1]  //    Then store the new sp in x4 to the PCB 
 
     ldr x0, =readyQueue          // Load the value 42 into register x0 (parameter for my_function)
-    ldr x1, =running
+    ldr x2, =running
+    ldr x1, [x2]
 
     sub sp, sp, 16
     str x30, [sp]
