@@ -50,7 +50,7 @@ dispatch:
     str x30, [sp, #240]
 
     mrs     x0, SPSR_EL1      // Save PSTATE
-	str     x0, [sp, 16*15+8]
+	str     x30, [sp, 16*15+8]
 
     adr     x1, running
     ldr     x1, [x1]  // put the first value in the PCB (sp) into x1
