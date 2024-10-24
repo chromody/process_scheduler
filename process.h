@@ -1,6 +1,7 @@
 #ifndef PROCESS_H
 #define PROCESS_H
 #include <stdint.h>
+#include <stddef.h>
 
 #define MAX_PROCESSES 4
 #define STACK_SIZE 1024
