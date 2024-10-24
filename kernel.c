@@ -33,17 +33,17 @@ int p4();
 
 //--Main 
 int main() {
-	int retval = 0;
+	int retval = 0; // our return value if we fail
 
 	//defining our boundaries
-	clear_src(0, 0, term_txtheight(), term_txtwidth()); // clearing the section that we draw in
+	clear_src(0, 0, term_txtheight(), term_txtwidth()); //clearing the section that we draw in
 	print_to(0, 0, "Printing Process!"); //printing hello world
 	
-	readyQueue.head = NULL;
+	readyQueue.head = NULL; //initializing our ready queue
 	readyQueue.tail = NULL;
 	readyQueue.size = 0;
 
-	retval = create_process(p1);
+	retval = create_process(p1); //creating our processes and seeing if anything bad happens
 	if (retval != 0) {return -1;}
 
 	retval = create_process(p2);
@@ -55,7 +55,7 @@ int main() {
 	retval = create_process(p4);
 	if (retval != 0) {return -1;}
 
-	go();
+	go(); //heading to our process_asm code. It will effectively run process and switch to a different process.
 
 	return 0;
 }

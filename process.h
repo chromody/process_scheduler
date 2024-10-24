@@ -3,7 +3,6 @@
 	Name: process.h
 	Purpose: This serves as a header file for the process c file.
 */
-
 #ifndef PROCESS_H
 #define PROCESS_H
 #include <stdint.h>
