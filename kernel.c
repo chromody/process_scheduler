@@ -16,8 +16,6 @@ PCB_t *running; // Pointer to the currently running PCB
 //--Prototypes -------------------------------------------------------------------------------------
 
 //++++++++++++++++++++++BOX+++++++++++++++++++++++++++++++++++++++++++++++++++++
-//void putc_to(unsigned int row, unsigned int col, const char c); //Prototype to print a character, defined in libos.a
-//void print_to(unsigned int row, unsigned int col, const char[]); //Prototype to print some text, defined in libos.a
 void clear_src(unsigned int startRow, unsigned int startColumn, unsigned int endRow, unsigned int endColumn); //Prototype to clear at a ordered pair, defined in libos.a
 void box(unsigned int startRow, unsigned int startColumn, unsigned int endRow, unsigned int endColumn); //Prototype to draw a box, defined in box.S
 int term_txtheight(); //Prototype to find the maximum height of the terminal, defined in libos.a
@@ -25,10 +23,7 @@ int term_txtwidth(); //Prototype to find the maximum width of the terminal, defi
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //++++++++++++++++++++++SCHEDULING++++++++++++++++++++++++++++++++++++++++++++++
-void go();
-void dispatch();
-
-int p1();
+int p1(); //Prototypes for our processes that we will run
 int p2();
 int p3();
 int p4();
@@ -79,6 +74,9 @@ void clear_src(unsigned int startRow, unsigned int startColumn, unsigned int end
 	}
 }
 
+// Name: p1()
+// Arguments:
+// Purpose: This will print a box on the top left
 int p1() {
 	unsigned int startRow = 9;
 	unsigned int startColumn = 23;
@@ -101,6 +99,9 @@ int p1() {
 	}
 }
 
+// Name: p2()
+// Arguments:
+// Purpose: This will print a box on the bottom left
 int p2() {
 	unsigned int startRow = 13;
 	unsigned int startColumn = 23;
@@ -123,6 +124,9 @@ int p2() {
 	}
 }
 
+// Name: p3()
+// Arguments:
+// Purpose: This will print a box on the top right
 int p3() {
 	unsigned int startRow = 9;
 	unsigned int startColumn = 49;
@@ -145,6 +149,9 @@ int p3() {
 	}
 }
 
+// Name: p4()
+// Arguments:
+// Purpose: This will print a box on the bottom right
 int p4() {
 	unsigned int startRow = 13;
 	unsigned int startColumn = 49;
