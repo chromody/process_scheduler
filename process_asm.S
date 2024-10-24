@@ -14,11 +14,20 @@
 .global readyQueue, nextPid, running, stacks, pcbs
 //--------------------------------------------------------------------------------------------------
 
-// Function to start the first process
+
+
+//--Functions/Labels -------------------------------------------------------------------------------
+
+// Name: go
+// Arguments: 
+// Purpose: This will branch to restore context to start our task scheduling
 go:
     b restore_context
 
-dispatch:
+// Name: dispatch
+// Arguments: 
+// Purpose: This will dispatch a process. So it will save the context of the currently running process. Then it will place that on our global ready queue, and then it will fall through into our restore_context function/label
+dispatch: //basically it ends the process
     /*
     dispatch:
     1)	subtract 16*16 from the stack
@@ -74,7 +83,10 @@ dispatch:
     ldr x30, [sp]
     add sp, sp, 16
 
-restore_context:
+// Name: restore_context
+// Arguments: 
+// Purpose: This will restore the context of the process that is at the head of the ready queue.
+restore_context: // Basically it starts the next process.
     /*
     restore_context:   // Note that this is where go() jumps
     6)	call dequeue passing it the address of ReadyQ
@@ -94,43 +106,43 @@ restore_context:
     11) add 16*16 to sp
     12) return
     */
-    ldr x0, =readyQueue          // Load the value 42 into register x0 (parameter for my_function)
+    ldr x0, =readyQueue // Loading in the address of readyQueue into x0, as we are going to pass it as a argument to dequeue
     
-    sub sp, sp, 16
+    sub sp, sp, 16 // Saving the stack. I don't know if this is required, but I will keep it here for safety
     str x30, [sp]
-    bl dequeue       // Call my_function, passing the parameter in x0
+    bl dequeue       // branching into our process
     ldr x30, [sp]
     add sp, sp, 16
     
-    ldr x1, =running      // Load the address of the result variable
-    str x0, [x1]         // Store the return value into result
+    ldr x1, =running      // loading the address of the result variable
+    str x0, [x1]         // storing the return value into result
 
-    adr x1, running
-    str x0, [x1]
-    ldr x2, [x0]
-    mov sp, x2
+    adr x1, running //loading the address of running into x1
+    str x0, [x1] // storing that into x0. I believe do this right before but I just decided to copy and paste this part
+    ldr x2, [x0] // loading the value of our stack pointer into x2
+    mov sp, x2 // moving that into our actual stack pointer
 
-    ldr x0, [sp, 16*15+8]
+    ldr x0, [sp, 16*15+8] //saving PSTATE on the stack
     msr SPSR_EL1, x0
 
     // Restore registers x0-x30 from the stack
-    ldp x0, x1, [sp]             // Restore x0 and x1
-    ldp x2, x3, [sp, #16]        // Restore x2 and x3
-    ldp x4, x5, [sp, #32]        // Restore x4 and x5
-    ldp x6, x7, [sp, #48]        // Restore x6 and x7
-    ldp x8, x9, [sp, #64]        // Restore x8 and x9
-    ldp x10, x11, [sp, #80]      // Restore x10 and x11
-    ldp x12, x13, [sp, #96]      // Restore x12 and x13
-    ldp x14, x15, [sp, #112]     // Restore x14 and x15
-    ldp x16, x17, [sp, #128]     // Restore x16 and x17
-    ldp x18, x19, [sp, #144]     // Restore x18 and x19
-    ldp x20, x21, [sp, #160]     // Restore x20 and x21
-    ldp x22, x23, [sp, #176]     // Restore x22 and x23
-    ldp x24, x25, [sp, #192]     // Restore x24 and x25
-    ldp x26, x27, [sp, #208]     // Restore x26 and x27
-    ldp x28, x29, [sp, #224]     // Restore x28 and x29
+    ldp x0, x1, [sp]             
+    ldp x2, x3, [sp, #16]        
+    ldp x4, x5, [sp, #32]        
+    ldp x6, x7, [sp, #48]        
+    ldp x8, x9, [sp, #64]       
+    ldp x10, x11, [sp, #80]      
+    ldp x12, x13, [sp, #96]      
+    ldp x14, x15, [sp, #112]     
+    ldp x16, x17, [sp, #128]     
+    ldp x18, x19, [sp, #144]     
+    ldp x20, x21, [sp, #160]     
+    ldp x22, x23, [sp, #176]    
+    ldp x24, x25, [sp, #192]  
+    ldp x26, x27, [sp, #208]     
+    ldp x28, x29, [sp, #224]     
     ldr x30, [sp, #240]
 
-    add sp, sp, #256 // 16*16
+    add sp, sp, #256 // adding 16 * 16 to the stack
 
     ret  // Return to the next process
