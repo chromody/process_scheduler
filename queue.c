@@ -35,3 +35,5 @@ PCB_t *dequeue(PCB_Q_t *q) {
     pcb->next = NULL; // Clean up the next pointer
     return pcb; // Return the dequeued PCB
 }
+
+PCB_t readyQueue;

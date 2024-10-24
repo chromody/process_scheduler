@@ -12,6 +12,6 @@ typedef struct PCB_Q {
 void enqueue(PCB_Q_t *q, PCB_t *pcb);
 PCB_t *dequeue(PCB_Q_t *q);
 
-PCB_Q_t readyQueue;
+extern PCB_Q_t readyQueue;
 
 #endif 

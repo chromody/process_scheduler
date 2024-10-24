@@ -40,3 +40,8 @@ PCB_t* alloc_pcb() {
 	}
 	return &pcbs[next_process++];
 }
+
+PCB_t *running; // Pointer to the currently running PCB
+int nextPID = 1;
+uint64_t stacks[MAX_PROCESSES][STACK_SIZE]; // Fixed-size array for stacks
+PCB_t pcbs[MAX_PROCESSES];
