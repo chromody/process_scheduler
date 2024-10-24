@@ -59,7 +59,12 @@ dispatch:
 
     ldr x0, =readyQueue          // Load the value 42 into register x0 (parameter for my_function)
     ldr x1, =running
+
+    sub sp, sp, 16
+    str x30, [sp]
     bl enqueue
+    ldr x30, [sp]
+    add sp, sp, 16
 
 restore_context:
     /*
@@ -82,7 +87,13 @@ restore_context:
     12) return
     */
     ldr x0, =readyQueue          // Load the value 42 into register x0 (parameter for my_function)
+    
+    sub sp, sp, 16
+    str x30, [sp]
     bl dequeue       // Call my_function, passing the parameter in x0
+    ldr x30, [sp]
+    add sp, sp, 16
+    
     ldr x1, =running      // Load the address of the result variable
     str x0, [x1]         // Store the return value into result
 

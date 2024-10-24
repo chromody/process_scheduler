@@ -43,7 +43,6 @@ int term_txtheight(); //Prototype to find the maximum height of the terminal, de
 int term_txtwidth(); //Prototype to find the maximum width of the terminal, defined in libos.a
 
 
-int create_process();
 uint64_t* alloc_stack();
 PCB_t *alloc_pcb();
 void go();
@@ -263,7 +262,7 @@ int p3() {
 		if (num > 9) {
 			num = 0; 
 		}
-			dispatch();//call dispatch
+		dispatch();//call dispatch
 	}
 }
 
