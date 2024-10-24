@@ -5,13 +5,14 @@
 */
 
 .section .text
-.global dispatch
-.global go
-.global readyQueue //readyqueue from kernel.c
-.global nextPid
-.global running
-.global stacks
-.global pcbs
+
+//--Global Functions/Labels ------------------------------------------------------------------------
+.global dispatch, go
+//--------------------------------------------------------------------------------------------------
+
+//--Global Variables -------------------------------------------------------------------------------
+.global readyQueue, nextPid, running, stacks, pcbs
+//--------------------------------------------------------------------------------------------------
 
 // Function to start the first process
 go:
