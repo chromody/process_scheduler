@@ -4,6 +4,7 @@
         "stdint.h": "c",
         "stddef.h": "c",
         "queue.h": "c",
-        "process.h": "c"
+        "process.h": "c",
+        "process_asm.h": "c"
     }
 }

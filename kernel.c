@@ -3,10 +3,11 @@
 	Name: kernel.c
 	Purpose: This will serve as the driver for our operating system? It just draws a box and hello string right now
 */
-#include "libos.h"
-#include "queue.h"
 #include <stdint.h>
 #include <stddef.h>
+#include "libos.h"
+#include "queue.h"
+#include "process_asm.h"
 
 //--Global Variables -------------------------------------------------------------------------------
 PCB_Q_t readyQueue;
