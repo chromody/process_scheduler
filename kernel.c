@@ -153,7 +153,7 @@ int create_process(int (*code_address)()) {
 	if (pcb == NULL) {return -1;}
 
 	pcb->sp = sp;
-	pcb->pid = nextPID;
+	pcb->pid = nextPID++;
 
 	enqueue(&readyQueue, pcb);
 
